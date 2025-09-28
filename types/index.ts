@@ -16,6 +16,7 @@ export interface User {
   education?: string;
   languages?: string[];
   verified?: boolean;
+  specializations?: string[];
 }
 
 export interface TutorSession {
@@ -37,7 +38,7 @@ export interface Subject {
   id: string;
   name: string;
   category: string;
-  icon?: string;
+  iconName?: string; // Changed from icon to iconName for Ionicons
 }
 
 export interface SearchFilters {

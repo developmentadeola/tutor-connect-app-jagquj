@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
-import { colors, commonStyles } from '../styles/commonStyles';
+import { colors, commonStyles, spacing, borderRadius } from '../styles/commonStyles';
 import { subjects, mockTutors } from '../data/mockData';
 import SearchBar from '../components/SearchBar';
 import SubjectCard from '../components/SubjectCard';
@@ -40,19 +40,20 @@ export default function HomeScreen() {
       <ScrollView style={commonStyles.content} showsVerticalScrollIndicator={false}>
         {/* Header */}
         <View style={styles.header}>
-          <View>
+          <View style={styles.headerContent}>
+            <Text style={styles.greeting}>Welcome back!</Text>
             <Text style={commonStyles.title}>Find Your Perfect Tutor</Text>
-            <Text style={commonStyles.textLight}>
+            <Text style={commonStyles.textSecondary}>
               Connect with expert tutors for personalized learning
             </Text>
           </View>
-          <TouchableOpacity style={styles.profileButton}>
-            <Icon name="person-circle-outline" size={32} color={colors.primary} />
+          <TouchableOpacity style={styles.profileButton} activeOpacity={0.7}>
+            <Icon name="person-circle" size={40} color={colors.primary} />
           </TouchableOpacity>
         </View>
 
         {/* Search Bar */}
-        <TouchableOpacity onPress={handleSearchPress}>
+        <TouchableOpacity onPress={handleSearchPress} activeOpacity={1}>
           <SearchBar
             value={searchQuery}
             onChangeText={setSearchQuery}
@@ -64,14 +65,23 @@ export default function HomeScreen() {
         {/* Quick Stats */}
         <View style={styles.statsContainer}>
           <View style={styles.statCard}>
+            <View style={styles.statIconContainer}>
+              <Icon name="people" size={24} color={colors.primary} />
+            </View>
             <Text style={styles.statNumber}>500+</Text>
             <Text style={styles.statLabel}>Expert Tutors</Text>
           </View>
           <View style={styles.statCard}>
+            <View style={styles.statIconContainer}>
+              <Icon name="library" size={24} color={colors.success} />
+            </View>
             <Text style={styles.statNumber}>50+</Text>
             <Text style={styles.statLabel}>Subjects</Text>
           </View>
           <View style={styles.statCard}>
+            <View style={styles.statIconContainer}>
+              <Icon name="trophy" size={24} color={colors.accent} />
+            </View>
             <Text style={styles.statNumber}>10k+</Text>
             <Text style={styles.statLabel}>Sessions</Text>
           </View>
@@ -81,8 +91,11 @@ export default function HomeScreen() {
         <View style={commonStyles.section}>
           <View style={commonStyles.spaceBetween}>
             <Text style={commonStyles.subtitle}>Popular Subjects</Text>
-            <TouchableOpacity onPress={() => router.push('/subjects')}>
-              <Text style={styles.seeAllText}>See All</Text>
+            <TouchableOpacity onPress={() => router.push('/subjects')} activeOpacity={0.7}>
+              <View style={commonStyles.row}>
+                <Text style={styles.seeAllText}>See All</Text>
+                <Icon name="chevron-forward" size={16} color={colors.primary} />
+              </View>
             </TouchableOpacity>
           </View>
           
@@ -102,8 +115,11 @@ export default function HomeScreen() {
         <View style={commonStyles.section}>
           <View style={commonStyles.spaceBetween}>
             <Text style={commonStyles.subtitle}>Featured Tutors</Text>
-            <TouchableOpacity onPress={() => router.push('/search')}>
-              <Text style={styles.seeAllText}>See All</Text>
+            <TouchableOpacity onPress={() => router.push('/search')} activeOpacity={0.7}>
+              <View style={commonStyles.row}>
+                <Text style={styles.seeAllText}>See All</Text>
+                <Icon name="chevron-forward" size={16} color={colors.primary} />
+              </View>
             </TouchableOpacity>
           </View>
           
@@ -122,36 +138,45 @@ export default function HomeScreen() {
           
           <View style={styles.stepsContainer}>
             <View style={styles.step}>
-              <View style={styles.stepIcon}>
-                <Icon name="search" size={24} color={colors.primary} />
+              <View style={[styles.stepIcon, { backgroundColor: `${colors.primary}15` }]}>
+                <Icon name="search" size={28} color={colors.primary} />
               </View>
-              <Text style={styles.stepTitle}>1. Find a Tutor</Text>
-              <Text style={styles.stepDescription}>
-                Browse through our verified tutors and find the perfect match
-              </Text>
+              <View style={styles.stepContent}>
+                <Text style={styles.stepTitle}>Find a Tutor</Text>
+                <Text style={styles.stepDescription}>
+                  Browse through our verified tutors and find the perfect match for your learning needs
+                </Text>
+              </View>
             </View>
             
             <View style={styles.step}>
-              <View style={styles.stepIcon}>
-                <Icon name="calendar" size={24} color={colors.primary} />
+              <View style={[styles.stepIcon, { backgroundColor: `${colors.success}15` }]}>
+                <Icon name="calendar" size={28} color={colors.success} />
               </View>
-              <Text style={styles.stepTitle}>2. Book a Session</Text>
-              <Text style={styles.stepDescription}>
-                Schedule a session at your convenience with flexible timing
-              </Text>
+              <View style={styles.stepContent}>
+                <Text style={styles.stepTitle}>Book a Session</Text>
+                <Text style={styles.stepDescription}>
+                  Schedule a session at your convenience with flexible timing options
+                </Text>
+              </View>
             </View>
             
             <View style={styles.step}>
-              <View style={styles.stepIcon}>
-                <Icon name="school" size={24} color={colors.primary} />
+              <View style={[styles.stepIcon, { backgroundColor: `${colors.accent}15` }]}>
+                <Icon name="school" size={28} color={colors.accent} />
               </View>
-              <Text style={styles.stepTitle}>3. Start Learning</Text>
-              <Text style={styles.stepDescription}>
-                Connect with your tutor and begin your personalized learning journey
-              </Text>
+              <View style={styles.stepContent}>
+                <Text style={styles.stepTitle}>Start Learning</Text>
+                <Text style={styles.stepDescription}>
+                  Connect with your tutor and begin your personalized learning journey
+                </Text>
+              </View>
             </View>
           </View>
         </View>
+
+        {/* Bottom Spacing */}
+        <View style={{ height: spacing.xl }} />
       </ScrollView>
 
       <FilterBottomSheet
@@ -169,77 +194,107 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
-    marginBottom: 24,
+    marginBottom: spacing.xl,
+  },
+  headerContent: {
+    flex: 1,
+    marginRight: spacing.md,
+  },
+  greeting: {
+    fontSize: 16,
+    fontWeight: '500',
+    color: colors.textMuted,
+    marginBottom: spacing.xs,
   },
   profileButton: {
-    padding: 4,
+    padding: spacing.xs,
+    borderRadius: borderRadius.full,
+    backgroundColor: colors.backgroundSoft,
   },
   statsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 32,
+    marginBottom: spacing.xl,
+    gap: spacing.md,
   },
   statCard: {
     flex: 1,
     backgroundColor: colors.card,
-    borderRadius: 12,
-    padding: 16,
+    borderRadius: borderRadius.lg,
+    padding: spacing.lg,
     alignItems: 'center',
-    marginHorizontal: 4,
     borderWidth: 1,
-    borderColor: colors.border,
+    borderColor: colors.borderLight,
+    boxShadow: `0px 2px 8px ${colors.shadow}`,
+    elevation: 2,
+  },
+  statIconContainer: {
+    width: 48,
+    height: 48,
+    borderRadius: borderRadius.lg,
+    backgroundColor: colors.backgroundSoft,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: spacing.sm,
   },
   statNumber: {
     fontSize: 24,
-    fontWeight: '700',
-    color: colors.primary,
-    marginBottom: 4,
+    fontWeight: '800',
+    color: colors.text,
+    marginBottom: spacing.xs,
   },
   statLabel: {
     fontSize: 12,
     color: colors.textMuted,
     textAlign: 'center',
+    fontWeight: '600',
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
   },
   seeAllText: {
     color: colors.primary,
     fontSize: 14,
     fontWeight: '600',
+    marginRight: spacing.xs,
   },
   subjectsGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 12,
-    marginTop: 16,
+    gap: spacing.md,
+    marginTop: spacing.lg,
   },
   subjectItem: {
     width: '48%',
   },
   stepsContainer: {
-    marginTop: 16,
+    marginTop: spacing.lg,
+    gap: spacing.lg,
   },
   step: {
-    alignItems: 'center',
-    marginBottom: 24,
+    flexDirection: 'row',
+    alignItems: 'flex-start',
   },
   stepIcon: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    backgroundColor: colors.backgroundAlt,
+    width: 64,
+    height: 64,
+    borderRadius: borderRadius.lg,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 12,
+    marginRight: spacing.lg,
+  },
+  stepContent: {
+    flex: 1,
+    paddingTop: spacing.sm,
   },
   stepTitle: {
-    fontSize: 16,
-    fontWeight: '600',
+    fontSize: 18,
+    fontWeight: '700',
     color: colors.text,
-    marginBottom: 8,
+    marginBottom: spacing.sm,
   },
   stepDescription: {
     fontSize: 14,
-    color: colors.textLight,
-    textAlign: 'center',
-    lineHeight: 20,
+    color: colors.textSecondary,
+    lineHeight: 22,
   },
 });
