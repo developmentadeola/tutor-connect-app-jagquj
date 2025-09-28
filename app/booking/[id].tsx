@@ -3,10 +3,10 @@ import React, { useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router, useLocalSearchParams } from 'expo-router';
-import { colors, commonStyles, buttonStyles } from '../styles/commonStyles';
-import { mockTutors } from '../data/mockData';
-import Icon from '../components/Icon';
-import Button from '../components/Button';
+import { colors, commonStyles, buttonStyles } from '../../styles/commonStyles';
+import { mockTutors } from '../../data/mockData';
+import Icon from '../../components/Icon';
+import Button from '../../components/Button';
 
 export default function BookingScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
