@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router, useLocalSearchParams } from 'expo-router';
-import { colors, commonStyles } from '../styles/commonStyles';
-import { mockTutors } from '../data/mockData';
-import Icon from '../components/Icon';
+import { colors, commonStyles } from '../../styles/commonStyles';
+import { mockTutors } from '../../data/mockData';
+import Icon from '../../components/Icon';
 
 interface ChatMessage {
   id: string;

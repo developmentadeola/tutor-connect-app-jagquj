@@ -3,11 +3,11 @@ import React, { useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router, useLocalSearchParams } from 'expo-router';
-import { colors, commonStyles, buttonStyles } from '../styles/commonStyles';
-import { mockTutors } from '../data/mockData';
-import Icon from '../components/Icon';
-import Button from '../components/Button';
-import SimpleBottomSheet from '../components/BottomSheet';
+import { colors, commonStyles, buttonStyles } from '../../styles/commonStyles';
+import { mockTutors } from '../../data/mockData';
+import Icon from '../../components/Icon';
+import Button from '../../components/Button';
+import SimpleBottomSheet from '../../components/BottomSheet';
 
 export default function TutorProfileScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
